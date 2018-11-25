@@ -30,6 +30,13 @@ class Concentration{
             }
         }
     }
+    //resetGame
+    func resetGame(){
+        for index in cards.indices{
+            cards[index].isFaceUP = false
+            cards[index].isMatched = false
+        }
+    }
     func chooseCard(at index: Int){
         assert(cards.indices.contains(index), "Concentration.chooseCard(at: \(index)): chooseCard index not in the cards")
         if !cards[index].isMatched{
@@ -55,3 +62,5 @@ class Concentration{
         // shuffle the cards
     }
 }
+
+

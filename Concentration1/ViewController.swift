@@ -16,6 +16,7 @@ class ViewController: UIViewController {
         return (cardButtons.count + 1) / 2
     }
     
+    
     private(set) var flipCount = 0{
         didSet{
             flipCountLabel.text = "Flips: \(flipCount)"
@@ -27,6 +28,10 @@ class ViewController: UIViewController {
     @IBOutlet private weak var scoreLabel: UILabel!
     
     @IBAction private func newGame(_ sender: UIButton) {
+        game.resetGame()
+        emoji = [Int:String]()
+        updateViewFromModel()
+        flipCount = 0
     }
     @IBOutlet private var cardButtons: [UIButton]!
     
