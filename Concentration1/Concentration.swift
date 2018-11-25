@@ -36,6 +36,7 @@ class Concentration{
             cards[index].isFaceUP = false
             cards[index].isMatched = false
         }
+        cards.shuffle()
     }
     func chooseCard(at index: Int){
         assert(cards.indices.contains(index), "Concentration.chooseCard(at: \(index)): chooseCard index not in the cards")
@@ -60,7 +61,24 @@ class Concentration{
             cards += [card,card]
         }
         // shuffle the cards
+        cards.shuffle()
     }
 }
+//extension Array{
+//    mutating func shuffle() {
+//        for _ in 0..<10{
+//            sort{(_,_) in arc4random() < arc4random()}
+//        }
+//    }
+//}
 
-
+//extension Array{
+//    mutating func shuffle() {
+//        if count < 2 {return}
+//        for i in indices.dropLast(){
+//            let diff = distance(from: i, to: endIndex)
+//            let j = index(i, offsetBy: diff.arc4random)
+//            swapAt(i, j)
+//        }
+//    }
+//}
