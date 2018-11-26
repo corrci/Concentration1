@@ -31,11 +31,16 @@ struct Concentration{
             }
         }
     }
+    //get the point
+    var score = 0
+    var seenCards = [Int]()
+
     //resetGame
     mutating func resetGame(){
         for index in cards.indices{
             cards[index].isFaceUP = false
             cards[index].isMatched = false
+            score = 0
         }
         cards.shuffle()
     }
@@ -47,6 +52,13 @@ struct Concentration{
                 if cards[matchIndex].identifier == cards[index].identifier{
                     cards[matchIndex].isMatched = true
                     cards[index].isMatched = true
+                    score += 2
+                }else{
+                    if seenCards.contains(index),seenCards.contains(matchIndex){
+                        score -= 1
+                    }
+                    seenCards.append(index)
+                    seenCards.append(matchIndex)
                 }
                 cards[index].isFaceUP = true
             }else{
