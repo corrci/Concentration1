@@ -29,10 +29,15 @@ class ViewController: UIViewController {
     
     @IBAction private func newGame(_ sender: UIButton) {
         game.resetGame()
+        themsIndex = Int.random(in: 0..<keys.count)
         updateViewFromModel()
         flipCount = 0
     }
-    @IBOutlet private var cardButtons: [UIButton]!
+    @IBOutlet private var cardButtons: [UIButton]!{
+        didSet{
+            themsIndex = Int.random(in: 0..<keys.count)
+        }
+    }
     
     @IBAction private func touchCard(_ sender: UIButton) {
         flipCount += 1
@@ -57,13 +62,34 @@ class ViewController: UIViewController {
         }
     }
     
-    private var emojiChoices = ["🍐","🌶","🍌","🌽","🍏","🍓","🍇","🍋","🍉","🥝"]
+    //private var emojiChoices = ["🍐","🌶","🍌","🌽","🍏","🍓","🍇","🍋","🍉","🥝"]
+    
+    private var emojiChoices = "🍐🌶🍌🌽🍏🍓🍇🍋🍉🥝"
+    
+    private var emojiThems  = [
+    "fruits" : "🍐🌶🍌🌽🍏🍓🍇🍋🍉🥝",
+    "animals" : "🐶🐱🐭🐰🦊🐻🐼🐨🐯🦁",
+    "insects" : "🐝🐛🦋🐌🐞🐜🦟🦗🕷🦂",
+    "fish" : "🐙🦑🦐🦞🦀🐡🐠🐟🐬🐳",
+    "vegetables" : "🍅🍆🥑🥦🥬🥒🌶🌽🥕🥔",
+    "desset" : "🥧🧁🍰🍮🍭🍬🍫🍿🍩🍪"
+    ]
+    
+    private var keys : [String] {return Array(emojiThems.keys)}
+    
+    private var themsIndex = 0{
+        didSet{
+            emojiChoices = emojiThems[keys[themsIndex]] ?? String()
+            emoji = [Int:String]()
+        }
+    }
     
     private var emoji = [Int:String]()
     
     private func emoji(for card: Card) -> String{
         if emoji[card.identifier] == nil, emojiChoices.count > 0{
-            emoji[card.identifier] = emojiChoices.remove(at: Int.random(in: 0..<emojiChoices.count))
+            let randomStringIndex = emojiChoices.index(emojiChoices.startIndex, offsetBy: Int.random(in: 0..<emojiChoices.count))
+            emoji[card.identifier] = String(emojiChoices.remove(at: randomStringIndex))
         }
         return emoji[card.identifier] ?? "?" 
     }
