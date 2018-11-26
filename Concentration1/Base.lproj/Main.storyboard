@@ -20,7 +20,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="UbL-3g-r7S">
-                                <rect key="frame" x="16" y="44" width="343" height="392"/>
+                                <rect key="frame" x="16" y="100" width="343" height="392"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Qlo-7k-N6M">
                                         <rect key="frame" x="0.0" y="0.0" width="343" height="72"/>
@@ -242,21 +242,30 @@
                                     </label>
                                 </subviews>
                             </stackView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="themsLabel" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dmV-io-i17">
+                                <rect key="frame" x="87.333333333333329" y="44" width="200.66666666666669" height="48"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="40"/>
+                                <color key="textColor" red="0.92143100499999997" green="0.92145264149999995" blue="0.92144101860000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="UbL-3g-r7S" secondAttribute="trailing" constant="16" id="8ON-do-JlI"/>
                             <constraint firstItem="KcE-s1-5ub" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="Gp6-J5-WLo"/>
+                            <constraint firstItem="dmV-io-i17" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="IyZ-Ib-3eT"/>
                             <constraint firstItem="KcE-s1-5ub" firstAttribute="top" relation="greaterThanOrEqual" secondItem="UbL-3g-r7S" secondAttribute="bottom" constant="8" symbolic="YES" id="Q6q-bI-pyC"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="KcE-s1-5ub" secondAttribute="bottom" constant="12" id="ZYF-fm-Tj4"/>
-                            <constraint firstItem="UbL-3g-r7S" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="dXx-Sg-MoO"/>
+                            <constraint firstItem="UbL-3g-r7S" firstAttribute="top" secondItem="dmV-io-i17" secondAttribute="bottom" constant="8" symbolic="YES" id="aVM-pL-6gN"/>
                             <constraint firstItem="UbL-3g-r7S" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="fSi-E2-A8I"/>
+                            <constraint firstItem="dmV-io-i17" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="jXw-ZQ-niN"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
                         <outlet property="flipCountLabel" destination="3nW-z5-VoH" id="ikP-do-bdQ"/>
                         <outlet property="scoreLabel" destination="qpK-ps-92H" id="gjT-lH-UQL"/>
+                        <outlet property="themsLabel" destination="dmV-io-i17" id="ZNR-Py-9gE"/>
                         <outletCollection property="cardButtons" destination="FzX-CR-rFV" collectionClass="NSMutableArray" id="p9L-i9-YtJ"/>
                         <outletCollection property="cardButtons" destination="9Kl-br-aba" collectionClass="NSMutableArray" id="1sD-8D-X3t"/>
                         <outletCollection property="cardButtons" destination="rZu-nR-q2d" collectionClass="NSMutableArray" id="VWM-j8-QLH"/>

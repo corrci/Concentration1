@@ -16,8 +16,7 @@ class ViewController: UIViewController {
         return (cardButtons.count + 1) / 2
     }
     
-    
-    private(set) var flipCount = 0
+    @IBOutlet weak var themsLabel: UILabel!
     
     @IBOutlet private weak var flipCountLabel: UILabel!
     
@@ -28,11 +27,7 @@ class ViewController: UIViewController {
         themsIndex = Int.random(in: 0..<keys.count)
         updateViewFromModel()
     }
-    @IBOutlet private var cardButtons: [UIButton]!{
-        didSet{
-            themsIndex = Int.random(in: 0..<keys.count)
-        }
-    }
+    @IBOutlet private var cardButtons: [UIButton]!
     
     @IBAction private func touchCard(_ sender: UIButton) {
         if let carNumber = cardButtons.index(of: sender){
@@ -42,6 +37,12 @@ class ViewController: UIViewController {
             print("chosen card was not in cardButtons")
         }
     }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        themsIndex = Int.random(in: 0..<keys.count)
+    }
+    
     private func updateViewFromModel(){
         for index in cardButtons.indices{
             let button = cardButtons[index]
@@ -63,18 +64,19 @@ class ViewController: UIViewController {
     private var emojiChoices = "🍐🌶🍌🌽🍏🍓🍇🍋🍉🥝"
     
     private var emojiThems  = [
-    "fruits" : "🍐🌶🍌🌽🍏🍓🍇🍋🍉🥝",
-    "animals" : "🐶🐱🐭🐰🦊🐻🐼🐨🐯🦁",
-    "insects" : "🐝🐛🦋🐌🐞🐜🦟🦗🕷🦂",
-    "fish" : "🐙🦑🦐🦞🦀🐡🐠🐟🐬🐳",
-    "vegetables" : "🍅🍆🥑🥦🥬🥒🌶🌽🥕🥔",
-    "desset" : "🥧🧁🍰🍮🍭🍬🍫🍿🍩🍪"
+    "Fruits" : "🍐🌶🍌🌽🍏🍓🍇🍋🍉🥝",
+    "Animals" : "🐶🐱🐭🐰🦊🐻🐼🐨🐯🦁",
+    "Insects" : "🐝🐛🦋🐌🐞🐜🦟🦗🕷🦂",
+    "Fish" : "🐙🦑🦐🦞🦀🐡🐠🐟🐬🐳",
+    "Vegetables" : "🍅🍆🥑🥦🥬🥒🌶🌽🥕🥔",
+    "Desset" : "🥧🧁🍰🍮🍭🍬🍫🍿🍩🍪"
     ]
     
     private var keys : [String] {return Array(emojiThems.keys)}
     
     private var themsIndex = 0{
         didSet{
+            themsLabel.text = keys[themsIndex]
             emojiChoices = emojiThems[keys[themsIndex]] ?? String()
             emoji = [Int:String]()
         }
