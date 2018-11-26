@@ -17,11 +17,7 @@ class ViewController: UIViewController {
     }
     
     
-    private(set) var flipCount = 0{
-        didSet{
-            flipCountLabel.text = "Flips: \(flipCount)"
-        }
-    }
+    private(set) var flipCount = 0
     
     @IBOutlet private weak var flipCountLabel: UILabel!
     
@@ -31,7 +27,6 @@ class ViewController: UIViewController {
         game.resetGame()
         themsIndex = Int.random(in: 0..<keys.count)
         updateViewFromModel()
-        flipCount = 0
     }
     @IBOutlet private var cardButtons: [UIButton]!{
         didSet{
@@ -40,7 +35,6 @@ class ViewController: UIViewController {
     }
     
     @IBAction private func touchCard(_ sender: UIButton) {
-        flipCount += 1
         if let carNumber = cardButtons.index(of: sender){
             game.chooseCard(at: carNumber)
             updateViewFromModel()
@@ -61,6 +55,7 @@ class ViewController: UIViewController {
             }
         }
         scoreLabel.text = "Score:\(game.score)"
+        flipCountLabel.text = "Flips: \(game.flipCount)"
     }
     
     //private var emojiChoices = ["🍐","🌶","🍌","🌽","🍏","🍓","🍇","🍋","🍉","🥝"]

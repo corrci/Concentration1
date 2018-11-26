@@ -32,8 +32,10 @@ struct Concentration{
         }
     }
     //get the point
-    var score = 0
-    var seenCards = [Int]()
+    private(set) var score = 0
+    private var seenCards = [Int]()
+    
+    var flipCount = 0
 
     //resetGame
     mutating func resetGame(){
@@ -41,19 +43,23 @@ struct Concentration{
             cards[index].isFaceUP = false
             cards[index].isMatched = false
             score = 0
+            flipCount = 0
         }
         cards.shuffle()
     }
     mutating func chooseCard(at index: Int){
         assert(cards.indices.contains(index), "Concentration.chooseCard(at: \(index)): chooseCard index not in the cards")
+        flipCount += 1
         if !cards[index].isMatched{
             if let matchIndex = indexOfOneAndOnlyFaceUpCard, matchIndex != index{
                 //check it cards match
                 if cards[matchIndex].identifier == cards[index].identifier{
                     cards[matchIndex].isMatched = true
                     cards[index].isMatched = true
+                    //match get 2 point
                     score += 2
                 }else{
+                    //!match and have seen lost 1 point
                     if seenCards.contains(index),seenCards.contains(matchIndex){
                         score -= 1
                     }
