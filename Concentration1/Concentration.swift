@@ -35,7 +35,7 @@ struct Concentration{
     private(set) var score = 0
     private var seenCards = [Int]()
     
-    var flipCount = 0
+    private(set) var flipCount = 0
 
     //resetGame
     mutating func resetGame(){
@@ -47,6 +47,19 @@ struct Concentration{
         }
         cards.shuffle()
     }
+    
+    //time rule
+    private var dateClick : Date?
+    private var timePenalty : Int{
+        return min(dateClick?.sinceNow ?? 0 , Point.maxTimePenalty)
+    }
+    struct Point {
+        static let matchBonus = 20
+        static let missMatchPenalty = 10
+        static let maxTimePenalty = 10
+    }
+    
+    
     mutating func chooseCard(at index: Int){
         assert(cards.indices.contains(index), "Concentration.chooseCard(at: \(index)): chooseCard index not in the cards")
         flipCount += 1
@@ -57,20 +70,22 @@ struct Concentration{
                     cards[matchIndex].isMatched = true
                     cards[index].isMatched = true
                     //match get 2 point
-                    score += 2
+                    score += Point.matchBonus
                 }else{
-                    //!match and have seen lost 1 point
+                    //!match and have seen lost  point
                     if seenCards.contains(index),seenCards.contains(matchIndex){
-                        score -= 1
+                        score -= Point.missMatchPenalty
                     }
                     seenCards.append(index)
                     seenCards.append(matchIndex)
                 }
+                score -= timePenalty
                 cards[index].isFaceUP = true
             }else{
                 // either no cards or two cards are face up
                 indexOfOneAndOnlyFaceUpCard = index
             }
+            dateClick = Date()
         }
     }
     init(numberOfPairsCards: Int) {
@@ -105,5 +120,11 @@ struct Concentration{
 extension Collection{
     var oneAndOnly: Element?{
         return count == 1 ? first : nil
+    }
+}
+
+extension Date{
+    var sinceNow : Int{
+        return -Int(self.timeIntervalSinceNow)
     }
 }
